@@ -1,10 +1,12 @@
-let custDao = require('../dao/custDao');
+const custDao = require('../dao/custDao');
+const commonService = require('./commonService');
 
 const custService = {
     getAll: async (ctx, next) => {
-        await custDao.getAll()
+        let data = ctx.request.body;
+        await custDao.getAll(data)
             .then(result => {
-                ctx.body = result;
+                commonService.writeData2Ctx(ctx, result);
             }).catch(err => {
                 console.log(err);
             });
