@@ -7,4 +7,4 @@ const loginDao = {
     }
 }
 
-module.exports = loginDao
+module.exports = loginDao;

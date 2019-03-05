@@ -1,9 +1,9 @@
-let mysql = require('../sql/mysql')
-let md5 = require('md5');
-let jwt = require('jsonwebtoken');
-let config = require('../config/default.js');
-let fs = require('fs');
-let path = require('path');
+const mysql = require('../sql/mysql');
+const md5 = require('md5');
+const jwt = require('jsonwebtoken');
+const config = require('../config/default.js');
+const fs = require('fs');
+const path = require('path');
 
 module.exports = {
     generateToken: data => {
@@ -29,4 +29,4 @@ module.exports = {
         return res;
 
     }
-}
+};

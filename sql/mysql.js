@@ -1,7 +1,7 @@
-let mysql = require('mysql');
-let config = require('../config/default');
+const mysql = require('mysql');
+const config = require('../config/default');
 
-let pool = mysql.createPool({
+const pool = mysql.createPool({
     host: config.database.host,
     user: config.database.user,
     password: config.database.password,
@@ -29,4 +29,4 @@ const sql = {
     }
 };
 
-module.exports = sql
+module.exports = sql;

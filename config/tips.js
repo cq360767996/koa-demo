@@ -35,4 +35,4 @@ module.exports = {
         code:1010,
         msg:'网络繁忙，请稍后重试！'
     }
-}
+};

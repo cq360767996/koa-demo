@@ -5,4 +5,4 @@ router.post('/login', async (ctx, next) => {
     await loginService.checkLogin(ctx, next);
 });
 
-module.exports = router
+module.exports = router;

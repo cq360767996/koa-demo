@@ -1,12 +1,12 @@
-const shopAccDao = require('../dao/shopAccDao');
+const familyAccDao = require('../dao/familyAccDao');
 const commonService = require('./commonService');
 const uuid = require('node-uuid');
 const tips = require('../config/tips');
 
-const shopAccService = {
+const familyAccService = {
     getAll: async (ctx, next) => { // 查询所有
         let data = ctx.request.body;
-        await shopAccDao.getAll(data)
+        await familyAccDao.getAll(data)
             .then(result => {
                 let balance = 0;
                 let len = result.length;
@@ -24,7 +24,7 @@ const shopAccService = {
     },
     getTotalPage: async (ctx, next) => { // 获取总页码
         let data = ctx.request.body;
-        await shopAccDao.getAll(data, true)
+        await familyAccDao.getAll(data, true)
             .then(result => {
                 commonService.writeData2Ctx(ctx, result[0]);
             }).catch(err => {
@@ -34,9 +34,9 @@ const shopAccService = {
     insert: async (ctx, next) => { // 新增
         let data = ctx.request.body;
         let id = uuid.v4().replace(/\-/g, '');
-        let {time, label, matter, account, custId} = data;
-        let params = [id, time, label, matter, account, custId];
-        await shopAccDao.insert(params)
+        let {time, label, matter, account} = data;
+        let params = [id, time, label, matter, account];
+        await familyAccDao.insert(params)
             .then(() => {
                 ctx.body = tips[200];
             }).catch(err => {
@@ -49,7 +49,7 @@ const shopAccService = {
         let data = ctx.request.body;
         let {time, label, matter, account, id} = data;
         let params = [time, label, matter, account, id];
-        await shopAccDao.update(params)
+        await familyAccDao.update(params)
             .then(() => {
                 ctx.body = tips[200];
             }).catch(err => {
@@ -59,7 +59,7 @@ const shopAccService = {
     delete: async (ctx, next) => { // 删除
         let data = ctx.request.body;
         for (let i = 0; i < data.length; i++) {
-            await shopAccDao.delete(data[i]).catch(err => {
+            await familyAccDao.delete(data[i]).catch(err => {
                 console.log(err);
             });
         }
@@ -67,4 +67,4 @@ const shopAccService = {
     }
 };
 
-module.exports = shopAccService;
+module.exports = familyAccService;
