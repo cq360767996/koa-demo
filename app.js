@@ -17,7 +17,7 @@ const MysqlStore = require('koa-mysql-session');
 const staticCache = require('koa-static-cache');
 const check = require('./middlewares/check');
 const tips = require('./config/tips');
-
+const koaBody = require('koa-body');
 // error handler
 onerror(app);
 
@@ -37,7 +37,8 @@ app.use(session({
 
 app.use(async (ctx, next) => {
     let {url = ''} = ctx;
-    if (url.indexOf('/login') == -1) {//需要校验登录态
+    console.log(url);
+    if (url.indexOf('/login') == -1 && url.indexOf('/data') == -1) { //需要校验登录态 // 不拦截图片数据
         let header = ctx.request.header;
         let loginedtoken = header.token;
         if (loginedtoken) {
@@ -56,6 +57,13 @@ app.use(async (ctx, next) => {
         await next();
     }
 });
+
+app.use(koaBody({
+    multipart: true,
+    formidable: {
+        maxFileSize: 200 * 1024 * 1024    // 设置上传文件大小最大限制，默认2M
+    }
+}));
 
 // // 缓存
 // app.use(staticCache(path.join(__dirname, './public'), { dynamic: true }, {

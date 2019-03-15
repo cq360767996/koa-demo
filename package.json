@@ -19,10 +19,10 @@
     "koa-router": "^7.1.1",
     "koa-static": "^3.0.0",
     "koa-views": "^5.2.1",
-    "pug": "^2.0.0-rc.1"
+    "pug": "^2.0.0-rc.1",
+    "koa-body": "latest"
   },
   "devDependencies": {
-    "fs": "^0.0.1-security",
     "jsonwebtoken": "^8.5.0",
     "koa-mysql-session": "^0.0.2",
     "koa-session-minimal": "^3.0.4",
@@ -30,7 +30,6 @@
     "md5": "^2.2.1",
     "mysql": "^2.16.0",
     "node-uuid": "^1.4.8",
-    "nodemon": "^1.8.1",
-    "uid": "^0.0.2"
+    "nodemon": "^1.8.1"
   }
 }
