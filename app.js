@@ -38,7 +38,7 @@ app.use(session({
 app.use(async (ctx, next) => {
     let {url = ''} = ctx;
     console.log(url);
-    if (url.indexOf('/login') == -1 && url.indexOf('/data') == -1) { //需要校验登录态 // 不拦截图片数据
+    if (url.indexOf('/login') == -1 && url.indexOf('/data') == -1 && ctx.request.req.method != 'GET') { //需要校验登录态 // 不拦截图片数据
         let header = ctx.request.header;
         let loginedtoken = header.token;
         if (loginedtoken) {
@@ -82,9 +82,7 @@ app.use(json());
 app.use(logger());
 app.use(require('koa-static')(__dirname + '/public'));
 
-// app.use(views(__dirname + '/views', {
-//   extension: 'pug'
-// }))
+app.use(views(__dirname + '/views'));
 
 // logger
 app.use(async (ctx, next) => {

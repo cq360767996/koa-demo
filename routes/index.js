@@ -1,6 +1,12 @@
 const router = require('koa-router')();
 let loginService = require('../service/loginService');
 
+// 主页面跳转
+router.get('/',async (ctx)=>{
+    await ctx.render('index',{
+    });
+});
+
 // 登陆请求
 router.post('/login', async (ctx, next) => {
     await loginService.checkLogin(ctx, next);
