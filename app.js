@@ -38,7 +38,7 @@ app.use(session({
 app.use(async (ctx, next) => {
     let {url = ''} = ctx;
     console.log(url);
-    if (url.indexOf('/login') == -1 && url.indexOf('/data') == -1 && ctx.request.req.method != 'GET') { //需要校验登录态 // 不拦截图片数据
+    if (url.indexOf('/login') == -1 && ctx.request.req.method != 'GET') { //需要校验登录态 // 不拦截图片数据
         let header = ctx.request.header;
         let loginedtoken = header.token;
         if (loginedtoken) {
