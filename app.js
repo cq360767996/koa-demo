@@ -37,7 +37,6 @@ app.use(session({
 
 app.use(async (ctx, next) => {
     let {url = ''} = ctx;
-    console.log(url);
     if (url.indexOf('/login') == -1 && ctx.request.req.method != 'GET') { //需要校验登录态 // 不拦截图片数据
         let header = ctx.request.header;
         let loginedtoken = header.token;
@@ -64,6 +63,14 @@ app.use(koaBody({
         maxFileSize: 200 * 1024 * 1024    // 设置上传文件大小最大限制，默认2M
     }
 }));
+
+// //first 中间件
+// app.use(function*(next){
+//     yield next;
+//     if(parseInt(this.status) === 404){
+//         this.redirect('/login');
+//     }
+// })
 
 // // 缓存
 // app.use(staticCache(path.join(__dirname, './public'), { dynamic: true }, {
