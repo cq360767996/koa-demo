@@ -18,6 +18,7 @@ const staticCache = require('koa-static-cache');
 const check = require('./middlewares/check');
 const tips = require('./config/tips');
 const koaBody = require('koa-body');
+// const {historyApiFallback} = require('koa2-connect-history-api-fallback')
 // error handler
 onerror(app);
 
@@ -28,6 +29,8 @@ const sessionMysqlConfig = {
     database: config.database.database,
     host: config.database.host,
 };
+
+// app.use(historyApiFallback({index: '/'}));
 
 // 配置session中间件
 app.use(session({

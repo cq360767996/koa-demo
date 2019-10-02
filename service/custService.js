@@ -9,14 +9,11 @@ const custService = {
     getAll: async (ctx, next) => {
         let data = ctx.request.body;
         let res = [];
-        await custDao.getAll(data)
+        if (data.isNotAll) {
+            await custDao.getAll(data)
             .then(result => {
-                if (data.isNotAll) {
-                    res = result;
-                    return custDao.getCostAndPay(data);
-                } else {
-                    commonService.writeData2Ctx(ctx, result);
-                }
+                res = result;
+                return custDao.getCostAndPay(data);
             }).then(result => {
                 for (let i = 0; i < res.length; i++) {
                     res[i].time = commonService.convertUTCTimeToLocalTime(res[i].time);
@@ -34,11 +31,12 @@ const custService = {
                     res[i].payment = payment;
                 }
                 commonService.writeData2Ctx(ctx, res);
-            }).catch(err => {
-                throw err;
-            }).catch(err => {
-                throw err;
             });
+        } else {
+            await custDao.getAll(data).then(result => {
+                commonService.writeData2Ctx(ctx, result);
+            });
+        }
     },
     getTotalPage: async (ctx, next) => {
         let data = ctx.request.body;

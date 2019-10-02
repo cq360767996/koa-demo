@@ -10,7 +10,8 @@ const familyAccDao = {
         }
         _sql += ' from family_account where 1 = 1';
         if (data.time) {
-            _sql += " and date_format(time, '%Y-%m') = '" + data.time + "'";
+            _sql += " and date_format(time, '%Y-%m') >= '" + data.time[0] + "'";
+            _sql += " and date_format(time, '%Y-%m') <= '" + data.time[1] + "'";
         }
         if (data.inOrOut) {
             if (data.inOrOut > 0) {

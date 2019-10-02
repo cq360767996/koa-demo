@@ -24,7 +24,7 @@ router.put('/edit', async (ctx, next) => {
 });
 
 // 删除
-router.delete('/delete', async (ctx, next) => {
+router.post('/delete', async (ctx, next) => {
     await familyAccService.delete(ctx, next);
 });
 
