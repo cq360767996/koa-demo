@@ -13,8 +13,8 @@ const shopAccDao = {
             _sql += " and b.name like '%" + data.custName + "%'";
         }
         if (data.time) {
-            _sql += ` and date_format(a.time, '%Y-%m') > '${data.time[0]}'`;
-            _sql += ` and date_format(a.time, '%Y-%m') < '${data.time[1]}'`;
+            _sql += ` and date_format(a.time, '%Y-%m') >= '${data.time[0]}'`;
+            _sql += ` and date_format(a.time, '%Y-%m') <= '${data.time[1]}'`;
         }
         if (data.inOrOut) {
             if (data.inOrOut > 0) {
