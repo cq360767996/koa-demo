@@ -11,7 +11,7 @@ const familyAccDao = {
         }' and date_format(a.time, '%Y-%m') <= '${data.time[1]}'`
       : "";
     if (data.inOrOut) {
-      _sql += data.inOrOut >= 0 ? " and a.account >= 0" : " and a.account < 0";
+      _sql += data.inOrOut > 0 ? " and a.account >= 0" : " and a.account < 0";
     }
     _sql += data.keyword ? ` and a.matter like '%${data.keyword}%'` : "";
     _sql += ` order by a.time asc;`;
@@ -24,7 +24,7 @@ const familyAccDao = {
      and date_format(time, '%Y-%m') <= '${data.time[1]}'`
       : "";
     if (data.inOrOut) {
-      _sql += data.inOrOut >= 0 ? " and account >= 0" : " and account < 0";
+      _sql += data.inOrOut > 0 ? " and account >= 0" : " and account < 0";
     }
     _sql += data.keyword ? ` and matter like %${data.keyword}%` : "";
     return mysql.query(_sql);
